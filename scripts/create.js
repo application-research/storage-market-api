@@ -35,6 +35,11 @@ const createRun = DB.schema.createTable('filecoin_storage_providers', function (
   table.timestamp('updated_at').notNullable().defaultTo(DB.raw('now()'));
 });
 
+const createRetrievalStats = DB.schema.createTable('retrievals_stats', function(table) {
+  table.uuid('id').primary().unique().notNullable().defaultTo(DB.raw('uuid_generate_v4()'));
+  table.string("sp_address").references('address').inTable('filecoin_storage_providers');
+})
+
 async function run() {
   await Promise.all([createRun]);
   console.log(`FINISHED: ${NAME}`);
