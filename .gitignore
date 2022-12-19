@@ -6,6 +6,8 @@
 .env-development
 .env-textile
 .env-production
+.vscode
+.vscode/**/*
 .DS_STORE
 DS_STORE
 yarn.lock

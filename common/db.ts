@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 import knex from 'knex';
-const db = knex({
+const DB = knex({
   client: 'pg',
   connection: {
     ssl: true,
@@ -15,4 +15,4 @@ const db = knex({
   },
 });
 
-module.exports = db;
+export default DB;
