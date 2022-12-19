@@ -1,0 +1,34 @@
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  color: #666;
+
+  &:visited {
+    color: #666;
+  }
+
+  &:hover {
+    color: #666;
+    opacity: 0.8;
+  }
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.row {
+  margin-top: 6px;
+  line-height: 1.5;
+  padding: 0 24px 0 24px;
+  margin-bottom: 24px;
+
+  &:first-child {
+    margin-top: 24px;
+  }
+
+  &:last-child {
+    margin-bottom: 128px;
+  }
+}
