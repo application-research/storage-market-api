@@ -37,7 +37,7 @@ const createFilecoinStorageProvidersTable = DB.schema.createTable('filecoin_stor
 
 const createRetrievalStatsTable = DB.schema.createTable('retrievals_stats', function(table) {
   table.uuid('id').primary().unique().notNullable().defaultTo(DB.raw('uuid_generate_v4()'));
-  table.string("sp_address").references('address').inTable('filecoin_storage_providers');
+  table.string("sp_address").unique().notNullable().references('address').inTable('filecoin_storage_providers');
   table.integer("count_success").nullable();
   table.integer("count_fail").nullable();
 })
