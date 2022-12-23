@@ -20,6 +20,7 @@ const createRun = DB.schema.createTable('market', function(table) {
   table.string('web3').nullable();
   table.string('replication_included').nullable();
   table.string('url').nullable();
+  table.string('src_logo').nullable();
   table.jsonb('metadata').nullable();
   table.jsonb('links').nullable();
   table.jsonb('data').nullable();

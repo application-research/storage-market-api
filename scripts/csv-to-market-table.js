@@ -26,6 +26,18 @@ const run = async () => {
         queryFn: async () => {
           const result = await DB.from('market').insert({
             name,
+            plan: name,
+            limit_storage_amount_bytes: null,
+            bytes_per_day_cents: null,
+            bytes_per_month_cents: null,
+            bytes_per_year_cents: null,
+            web3: null,
+            replication_included: false,
+            url: null,
+            src_logo: null,
+            metadata: {},
+            links: {},
+            data: {},
           });
         },
         errorFn: (e) => {
