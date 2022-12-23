@@ -12,6 +12,7 @@ const createRun = DB.schema.createTable('market', function(table) {
     .notNullable()
     .defaultTo(DB.raw('uuid_generate_v4()'));
   table.string('name').nullable();
+  table.string('plan').nullable();
   table.string('limit_storage_amount_bytes').nullable();
   table.string('bytes_per_day_cents').nullable();
   table.string('bytes_per_month_cents').nullable();

@@ -15,6 +15,7 @@ node_modules
 dist
 analytics.txt
 package-lock.json
+market.csv
 
 /**/*/.DS_STORE
 /**/*/node_modules
