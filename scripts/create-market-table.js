@@ -13,10 +13,12 @@ const createRun = DB.schema.createTable('market', function(table) {
     .defaultTo(DB.raw('uuid_generate_v4()'));
   table.string('name').nullable();
   table.string('plan').nullable();
-  table.string('limit_storage_amount_bytes').nullable();
-  table.string('bytes_per_day_cents').nullable();
-  table.string('bytes_per_month_cents').nullable();
-  table.string('bytes_per_year_cents').nullable();
+  table.string('gb_storage_limit').nullable();
+  table.string('gb_per_day_cents').nullable();
+  table.string('gb_per_month_cents').nullable();
+  table.string('gb_per_year_cents').nullable();
+  table.string('fixed_plan_cents').nullable();
+  table.string('fixed_plan_interval').nullable();
   table.string('web3').nullable();
   table.string('replication_included').nullable();
   table.string('url').nullable();

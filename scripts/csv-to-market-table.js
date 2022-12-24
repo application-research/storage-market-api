@@ -12,6 +12,25 @@ const getName = (text) => {
   return text;
 };
 
+const convertDollarsToCents = (text) => {
+  const dollars = Number(text);
+
+  if (isNaN(dollars)) {
+    return null;
+  }
+
+  const cents = dollars * 100;
+  return cents;
+};
+
+const convertToTrueFalse = (text) => {
+  if (text === 'Yes') {
+    return true;
+  }
+
+  return false;
+};
+
 const run = async () => {
   await DB('market').del();
 
@@ -27,11 +46,13 @@ const run = async () => {
           const result = await DB.from('market').insert({
             name,
             plan: name,
-            limit_storage_amount_bytes: null,
-            bytes_per_day_cents: null,
-            bytes_per_month_cents: null,
-            bytes_per_year_cents: null,
-            web3: null,
+            gb_storage_limit: null,
+            gb_per_day_cents: convertDollarsToCents(row['c']),
+            gb_per_month_cents: convertDollarsToCents(row['d']),
+            gb_per_year_cents: convertDollarsToCents(row['e']),
+            web3: convertDollarsToCents(row['f']),
+            fixed_plan_cents: null,
+            fixed_plan_interval: null,
             replication_included: false,
             url: null,
             src_logo: null,
