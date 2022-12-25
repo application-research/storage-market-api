@@ -3,7 +3,7 @@ import * as Utilities from '@common/utilities';
 
 import DB from '@common/db';
 
-export default async function apiGetStorageProvider(req, res) {
+export default async function APIGetStorageProvider(req, res) {
   await Server.cors(req, res);
 
   const { address } = req.query;
@@ -12,7 +12,9 @@ export default async function apiGetStorageProvider(req, res) {
     return res.json({ error: `no address was specified.` });
   }
 
-  const response = await DB.select().from('filecoin_storage_providers').where({ address });
+  const response = await DB.select()
+    .from('filecoin_storage_providers')
+    .where({ address });
 
   res.json({ ...response });
 }

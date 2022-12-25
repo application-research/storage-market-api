@@ -33,6 +33,20 @@ export default async function Page(props) {
   return (
     <DefaultLayout>
       <div className={styles.row}>
+        <h6 className={styles.heading}>get the current Filecoin price (powered by IEXCloud) or convert attoFil to USD and Filecoin.</h6>
+        <div>
+          <a className={styles.link} href="https://data.storage.market/api/market/filecoin?attofil=6643845374681246791213" target="_blank">
+            ➝ https://data.storage.market/api/market/filecoin?attofil=6643845374681246791213
+          </a>
+        </div>
+        <div>
+          <a className={styles.link} href="https://data.storage.market/api/market/filecoin?amount=1000000" target="_blank">
+            ➝ https://data.storage.market/api/market/filecoin?amount=1000000
+          </a>
+        </div>
+      </div>
+
+      <div className={styles.row}>
         <h6 className={styles.heading}>
           [WIP] [Not Working] get ranked storage providers to make deals with based on reputation, that have stored data on Estuary and/or similar data clients (8).
         </h6>
@@ -40,6 +54,7 @@ export default async function Page(props) {
           ➝ https://data.storage.market/api
         </a>
       </div>
+
       <div className={styles.row}>
         <h6 className={styles.heading}>get all providers that has stored data on Estuary and/or similar data clients.</h6>
         <a className={styles.link} href="https://data.storage.market/api/providers/" target="_blank">

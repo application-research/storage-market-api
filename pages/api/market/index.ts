@@ -2,7 +2,7 @@ import * as Server from '@common/server';
 
 import DB from '@common/db';
 
-export default async function apiIndex(req, res) {
+export default async function APIMarketIndex(req, res) {
   await Server.cors(req, res);
 
   const response = await DB.select()
