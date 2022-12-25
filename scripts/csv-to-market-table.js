@@ -32,7 +32,39 @@ const convertToTrueFalse = (text) => {
 };
 
 const run = async () => {
-  await DB('market').del();
+  await Utilities.runQuery({
+    queryFn: async () => {
+      const result = await DB.from('market').insert({
+        name: 'Estuary',
+        plan: 'Powered by IPFS & Filecoin based on token price',
+        gb_storage_limit: null,
+        gb_per_day_cents: 0.0000064 * 100,
+        gb_per_month_cents: 0.0000064 * 100 * (365 / 12),
+        gb_per_year_cents: 0.0000064 * 100 * 365,
+        web3: true,
+        fixed_plan_cents: null,
+        fixed_plan_interval: null,
+        replication_included: false,
+        url: null,
+        src_logo: null,
+        metadata: {},
+        links: {},
+        data: {},
+      });
+    },
+    errorFn: (e) => {
+      console.log(e);
+    },
+    label: `ADD_ESTUARY_REAL_TO_MARKET_TABLE_IN_DATABASE`,
+  });
+};
+
+/*
+
+const run = async () => {
+  // NOTE(jim)
+  // Do not run this command unless you want pain.
+  // await DB('market').del();
 
   fs.createReadStream('market.csv')
     .pipe(csv())
@@ -50,7 +82,7 @@ const run = async () => {
             gb_per_day_cents: convertDollarsToCents(row['c']),
             gb_per_month_cents: convertDollarsToCents(row['d']),
             gb_per_year_cents: convertDollarsToCents(row['e']),
-            web3: convertDollarsToCents(row['f']),
+            web3: convertToTrueFalse(row['f']),
             fixed_plan_cents: null,
             fixed_plan_interval: null,
             replication_included: false,
@@ -71,5 +103,7 @@ const run = async () => {
       console.log(`FINISHED: ${NAME}`);
     });
 };
+
+*/
 
 run();

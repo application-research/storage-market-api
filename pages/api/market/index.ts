@@ -9,7 +9,8 @@ export default async function apiIndex(req, res) {
     .from('market')
     .whereNotNull(`gb_per_day_cents`)
     .where('gb_per_day_cents', '>=', 0)
-    .orderBy('gb_per_day_cents', 'asc');
+    .orderBy('gb_per_day_cents', 'asc')
+    .orderByRaw('gb_storage_limit desc NULLS FIRST');
 
   res.json({ storageProviders: response, count: response.length });
 }
