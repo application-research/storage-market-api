@@ -21,7 +21,7 @@ To do this,
 2. Run the db start script `.dev/start.sh`
 3. Source the environment file, which will cause the app to connect to the dev db, `source .dev/dev.env`
 
-You can stop the dev db by running `.dev/start.sh`
+You can stop the dev db by running `.dev/stop.sh`
 
 DB tables will be persisted via a docker volume. You can purge all tables/data from the dev db by running `.dev/start.sh`, then start it back up again with `.dev/start.sh`
 
