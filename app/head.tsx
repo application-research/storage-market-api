@@ -21,13 +21,13 @@ export default async function Head({ params }) {
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="" />
+      <meta property="og:image" content="https://next-s3-public.s3.us-west-2.amazonaws.com/filecoin-social.png" />
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content="" />
+      <meta property="twitter:image" content="https://next-s3-public.s3.us-west-2.amazonaws.com/filecoin-social.png" />
     </>
   );
 }
