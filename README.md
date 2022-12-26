@@ -23,7 +23,11 @@ To do this,
 
 You can stop the dev db by running `.dev/stop.sh`
 
-DB tables will be persisted via a docker volume. You can purge all tables/data from the dev db by running `.dev/start.sh`, then start it back up again with `.dev/start.sh`
+#### Purging the dev DB
+DB tables will be persisted via a docker volume. You can purge all tables/data from the dev db by running 
+1. `.dev/purge.sh`
+2. `.dev/start.sh` (re-creates container)
+3. `.dev/start.sh` (run it a second time to start it up)
 
 ### Setup (MacOS)
 
@@ -42,8 +46,8 @@ If you need to run node script without running the server, use this example to g
 # creates the tables you need
 npm run script create
 
-# uopdates the tables
-npm run script create
+# updates the tables
+npm run script update
 
 # scans for database, typically a daily cron job
 npm run script scan

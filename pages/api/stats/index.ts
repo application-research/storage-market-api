@@ -3,15 +3,15 @@ import * as Server from '@common/server';
 import DB from '@common/db';
 
 interface RetrievalStatsPost {
-  timeStart: Date
-  timeEnd: Date
+  time_start: Date
+  time_end: Date
   stats: RetrievalStat[]
 }
 
 interface RetrievalStat {
   sp_address: string,
-  countSuccess: number,
-  countFail: number,
+  count_success: number,
+  count_fail: number,
 }
 
 // POST /stats
@@ -24,29 +24,40 @@ export default async function statsIndex(req, res) {
     return
   }
 
+  console.log(req.body)
 
+  const body = req.body as RetrievalStatsPost
   const sps = await DB.select().from('retrieval_stats');
-  const body = JSON.parse(req.body) as RetrievalStatsPost
 
   const toUpdate: RetrievalStat[] = [];
 
   body.stats.forEach(rs => {
+    // Don't insert junk/missing data
+    if (rs.count_fail == undefined || rs.count_success == undefined) {
+      return
+    }
+
     const existingSpStats = sps.find(sp => sp.sp_address === rs.sp_address)
     if (existingSpStats) {
-      existingSpStats.countSuccess += rs.countSuccess;
-      existingSpStats.countFail += rs.countFail;
+      existingSpStats.count_success += rs.count_success;
+      existingSpStats.count_fail += rs.count_fail;
       toUpdate.push(existingSpStats); 
     } else {
       const newSpStats = {
-        countSuccess: rs.countSuccess,
-        countFail: rs.countFail,
+        count_success: rs.count_success,
+        count_fail: rs.count_fail,
         sp_address: rs.sp_address,
       }
       toUpdate.push(newSpStats)
     }
   })
 
-  const result = await DB.batchInsert("filecoin_storage_providers", toUpdate)
+  if (toUpdate.length < 1) {
+    return res.json({count: 0})
+  }
 
-  res.json({ result, count: result.length });
+
+  const result = await DB.table("retrieval_stats").insert(toUpdate).onConflict("sp_address").merge().returning("*")
+
+  res.json({ count: result.length });
 }
