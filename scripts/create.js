@@ -4,8 +4,8 @@ const NAME = `create.js`;
 
 console.log(`RUNNING: ${NAME}`);
 
-const createRun = DB.schema.createTable('filecoin_storage_providers', function (table) {
-  table.uuid('id').primary().unique().notNullable().defaultTo(DB.raw('uuid_generate_v4()'));
+const createFilecoinStorageProvidersTable = DB.schema.createTable('filecoin_storage_providers', function (table) {
+  table.uuid('id').primary().unique().notNullable().defaultTo(DB.raw('gen_random_uuid()'));
   table.string('address').unique().notNullable();
   table.string('address_of_owner').nullable();
   table.string('address_of_worker').nullable();
@@ -35,8 +35,17 @@ const createRun = DB.schema.createTable('filecoin_storage_providers', function (
   table.timestamp('updated_at').notNullable().defaultTo(DB.raw('now()'));
 });
 
+const createRetrievalStatsTable = DB.schema.createTable('retrieval_stats', function(table) {
+  table.uuid('id').primary().unique().notNullable().defaultTo(DB.raw('gen_random_uuid()'));
+  table.string("sp_address").unique().notNullable().references('address').inTable('filecoin_storage_providers');
+  table.integer("count_success").nullable();
+  table.integer("count_fail").nullable();
+})
+
 async function run() {
-  await Promise.all([createRun]);
+  await createFilecoinStorageProvidersTable;
+  await createRetrievalStatsTable;
+
   console.log(`FINISHED: ${NAME}`);
   process.exit(0);
 }
