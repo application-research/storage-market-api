@@ -6,9 +6,9 @@ import '@root/global.scss';
 import styles from '@root/general-styles.module.scss';
 import DefaultLayout from '@components/DefaultLayout';
 
-async function makeExampleRequest({ host }) {
+async function makeRequest({ host, endpoint }) {
   try {
-    const res = await fetch(`http://${host}/api/providers`);
+    const res = await fetch(`http://${host}/api/${endpoint}`);
     const json = await res.json();
     return { ...json };
   } catch (e) {
@@ -18,7 +18,8 @@ async function makeExampleRequest({ host }) {
 
 export default async function Page(props) {
   const currentHeaders = headers();
-  const { storageProviders, count } = await makeExampleRequest({ host: currentHeaders.get('host') });
+  const { storageProviders, count } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'providers' });
+  const { mapUrl } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'map' });
 
   const listElements = storageProviders.map((each) => {
     return (
@@ -70,7 +71,14 @@ export default async function Page(props) {
       </div>
 
       <div className={styles.row}>
-        <h6 className={styles.heading}>get details on each storage provider that has stored data on Estuary ({count}).</h6>
+        <h6 className={styles.heading}>
+          get details on each storage provider that has stored data on Estuary ({count}) {" "}
+          <a className={styles.link} href={mapUrl} target="_blank">
+            &#128506; View Map
+          </a>
+          
+        </h6>
+
         {listElements}
       </div>
     </DefaultLayout>
