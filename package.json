@@ -18,6 +18,8 @@
     "@glif/filecoin-number": "^2.0.5",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.0.3",
+    "ipinfo": "^1.5.1",
+    "is-ip": "^5.0.0",
     "knex": "^2.3.0",
     "next": "13.0.6",
     "pg": "^8.8.0",

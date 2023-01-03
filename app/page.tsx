@@ -6,7 +6,7 @@ import '@root/global.scss';
 import styles from '@root/general-styles.module.scss';
 import DefaultLayout from '@components/DefaultLayout';
 
-async function makeExampleRequest({ host }) {
+async function makeRequest({ host }) {
   try {
     const res = await fetch(`http://${host}/api/providers`);
     const json = await res.json();
@@ -18,7 +18,7 @@ async function makeExampleRequest({ host }) {
 
 export default async function Page(props) {
   const currentHeaders = headers();
-  const { storageProviders, count } = await makeExampleRequest({ host: currentHeaders.get('host') });
+  const { storageProviders, count } = await makeRequest({ host: currentHeaders.get('host') });
 
   const listElements = storageProviders.map((each) => {
     return (
@@ -71,6 +71,7 @@ export default async function Page(props) {
 
       <div className={styles.row}>
         <h6 className={styles.heading}>get details on each storage provider that has stored data on Estuary ({count}).</h6>
+        <a className={styles.link} href={mapLink} target="_blank">Geo-Map</a>
         {listElements}
       </div>
     </DefaultLayout>
