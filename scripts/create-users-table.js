@@ -10,7 +10,7 @@ const createRun = DB.schema.createTable('users', function(table) {
     .primary()
     .unique()
     .notNullable()
-    .defaultTo(db.raw('uuid_generate_v4()'));
+    .defaultTo(DB.raw('uuid_generate_v4()'));
   table
     .string('username')
     .unique()
@@ -18,11 +18,11 @@ const createRun = DB.schema.createTable('users', function(table) {
   table
     .timestamp('created_at')
     .notNullable()
-    .defaultTo(db.raw('now()'));
+    .defaultTo(DB.raw('now()'));
   table
     .timestamp('updated_at')
     .notNullable()
-    .defaultTo(db.raw('now()'));
+    .defaultTo(DB.raw('now()'));
   table.string('password').nullable();
   table.string('salt').nullable();
   table.string('is_subscribed').nullable();
