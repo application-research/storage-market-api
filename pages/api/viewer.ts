@@ -3,17 +3,12 @@ import * as Utilities from '@common/utilities';
 import * as Query from '@data/query';
 import * as Auth from '@data/auth';
 
-export default async function APIUserByUsername(req, res) {
+export default async function APIViewer(req, res) {
   await Server.cors(req, res);
-
-  const username = req.query.id;
-  if (Utilities.isEmpty(username)) {
-    return res.json({ error: true, message: 'NO_USERNAME_PROVIDED' });
-  }
 
   const key = Auth.parseAuthKey(req.headers);
   if (Utilities.isEmpty(key)) {
-    return res.json({ error: true, message: 'NO_VALID_AUTHENTICATION_KEY' });
+    return res.json({ sucess: true, message: 'HEALTH' });
   }
 
   const isAuthenticated = Auth.getUsernameAndHashFromKey({ key });
@@ -21,15 +16,14 @@ export default async function APIUserByUsername(req, res) {
     return res.json({ error: true, message: 'NO_AUTHORIZED_KEY' });
   }
 
-  const user = await Query.selectUserByUsername({ username: username });
+  const user = await Query.selectUserByUsername({ username: isAuthenticated.username });
   if (!user) {
-    return res.json({ error: true, message: 'NO_USER' });
+    return res.json({ error: true, message: 'NO_VIEWER' });
   }
 
   // NOTE(jim): Need a safer way to handle this.
   delete user.password;
   delete user.salt;
-  delete user.email;
 
-  return res.json({ success: true, user });
+  return res.json({ success: true, isAuthenticated: true, user });
 }
