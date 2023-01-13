@@ -16,12 +16,12 @@ export default async function APIUserByUsername(req, res) {
     return res.json({ error: true, message: 'NO_VALID_AUTHENTICATION_KEY' });
   }
 
-  const isAuthenticated = Auth.isAuthenticated({ key });
+  const isAuthenticated = Auth.getUsernameAndHashFromKey({ key });
   if (!isAuthenticated) {
     return res.json({ error: true, message: 'NO_AUTHORIZED_KEY' });
   }
 
-  const user = await Query.selectUserByUsername({ username });
+  const user = await Query.selectUserByUsername({ username: isAuthenticated.username });
   if (!user) {
     return res.json({ error: true, message: 'NO_USER' });
   }

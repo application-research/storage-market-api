@@ -1,3 +1,9 @@
+import DB from '@common/db';
+
+function print({ address, copy }) {
+  console.log(`\x1b[1m\x1b[37m\[${address}\]\x1b[0m : ${copy}`);
+}
+
 export const runQuery = async ({ queryFn, errorFn, label }) => {
   let response;
   try {

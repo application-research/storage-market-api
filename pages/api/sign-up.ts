@@ -37,7 +37,7 @@ export default async function APISignUp(req, res) {
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-  const user = await Query.insertUser({ username, password: hash, email, salt });
+  const user = await Query.insertUser({ username: req.body.username, password: hash, email: req.body.email, salt });
   if (!user || user.error) {
     return res.json({ error: true, message: 'SIGN_UP_INVALID' });
   }
