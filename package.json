@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "dev": "next -p 3005",
+    "dev": "next -p 4444",
     "build": "next build",
     "start": "NODE_ENV=production next start",
     "script": "NODE_TLS_REJECT_UNAUTHORIZED=0 ts-node -O '{\"module\":\"commonjs\"}' scripts/index.js"
@@ -16,6 +16,8 @@
     "@filecoin-shipyard/lotus-client-rpc": "^1.2.0",
     "@filecoin-shipyard/lotus-client-schema": "^4.2.0",
     "@glif/filecoin-number": "^2.0.5",
+    "aes-js": "^3.1.2",
+    "bcrypt": "^5.1.0",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.0.3",
     "is-ip": "^5.0.0",
