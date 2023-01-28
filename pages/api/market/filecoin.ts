@@ -7,9 +7,10 @@ import DB from '@common/db';
 export default async function APIMarketFilecoin(req, res) {
   await Server.cors(req, res);
 
-  const response = await fetch(`https://cloud.iexapis.com/stable/crypto/filusdt/price?token=${process.env.IEX_CLOUD_PUBLIC_KEY}`);
-  const json = await response.json();
-  let results = { ...json };
+  // TODO(jim): they deprecated the API on me...
+  // const response = await fetch(`https://cloud.iexapis.com/stable/crypto/filusdt/price?token=${process.env.IEX_CLOUD_PUBLIC_KEY}`);
+  // const json = await response.json();
+  let results = { price: 6 };
 
   if (!Utilities.isEmpty(req.query.amount)) {
     results.amount_fil = req.query.amount;
