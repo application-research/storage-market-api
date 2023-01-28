@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import * as Server from '@common/server';
 import * as Utilities from '@common/utilities';
 import * as Filecoin from '@common/filecoin';
