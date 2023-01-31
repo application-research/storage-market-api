@@ -9,10 +9,20 @@ import DB from '@common/db';
 export default async function APIMarketFilecoin(req, res) {
   await Server.cors(req, res);
 
-  // TODO(jim): they deprecated the API on me...
-  // const response = await fetch(`https://cloud.iexapis.com/stable/crypto/filusdt/price?token=${process.env.IEX_CLOUD_PUBLIC_KEY}`);
-  // const json = await response.json();
+  // TODO(jim)
+  // Use last cached value from database.
   let results = { price: 6 };
+
+  // TODO(jim)
+  // Write an adapter instead of this
+  try {
+    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=filecoin&vs_currencies=usd`);
+    const json = await response.json();
+
+    results.price = json.filecoin.usd;
+  } catch (e) {
+    // NOTE(jim) do nothing. maybe retry. idk.
+  }
 
   if (!Utilities.isEmpty(req.query.amount)) {
     results.amount_fil = req.query.amount;
