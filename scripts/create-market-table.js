@@ -4,13 +4,8 @@ const NAME = `create-market-table.js`;
 
 console.log(`RUNNING: ${NAME}`);
 
-const createRun = DB.schema.createTable('market', function(table) {
-  table
-    .uuid('id')
-    .primary()
-    .unique()
-    .notNullable()
-    .defaultTo(DB.raw('uuid_generate_v4()'));
+const createRun = DB.schema.createTable('market', function (table) {
+  table.uuid('id').primary().unique().notNullable().defaultTo(DB.raw('uuid_generate_v4()'));
   table.string('name').nullable();
   table.string('plan').nullable();
   table.string('gb_storage_limit').nullable();
@@ -26,14 +21,8 @@ const createRun = DB.schema.createTable('market', function(table) {
   table.jsonb('metadata').nullable();
   table.jsonb('links').nullable();
   table.jsonb('data').nullable();
-  table
-    .timestamp('created_at')
-    .notNullable()
-    .defaultTo(DB.raw('now()'));
-  table
-    .timestamp('updated_at')
-    .notNullable()
-    .defaultTo(DB.raw('now()'));
+  table.timestamp('created_at').notNullable().defaultTo(DB.raw('now()'));
+  table.timestamp('updated_at').notNullable().defaultTo(DB.raw('now()'));
   table.timestamp('deleted_at').nullable();
 });
 
