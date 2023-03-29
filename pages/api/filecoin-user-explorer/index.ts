@@ -7,7 +7,7 @@ import cache from 'memory-cache';
 const CACHE_KEY = 'fil-user-explorer-data';
 const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
-async function APIFilecoinUserExplorer(req, res) {
+export default async function APIFilecoinUserExplorer(req, res) {
   const cachedData = cache.get(CACHE_KEY);
 
   if (cachedData) {
@@ -31,6 +31,7 @@ async function APIFilecoinUserExplorer(req, res) {
 
     const data = await response.json();
     const clients = data.data;
+    console.log(clients);
 
     if (clients.length === 0) {
       break;
@@ -38,51 +39,49 @@ async function APIFilecoinUserExplorer(req, res) {
 
     allClients = allClients.concat(clients);
     page++;
-
-    //wait 2 seconds before the next request
-    await new Promise((resolve) => setTimeout(resolve, 8000));
-
-    for (const client of allClients) {
-      await DB('fil-user-explorer')
-        .insert({
-          address: client.address,
-          address_id: client.addressId,
-          allowance: client.allowance,
-          allowance_array: JSON.stringify(client.allowanceArray),
-          audit_trail: client.auditTrail,
-          create_message_timestamp: client.createMessageTimestamp,
-          create_at_height: client.createAtHeight,
-          deal_count: client.dealCount,
-          industry: client.industry,
-          initial_allowance: client.initialAllowance,
-          issue_create_timestamp: client.issueCreateTimestamp,
-          name: client.name,
-          org_name: client.orgName,
-          provider_count: client.providerCount,
-          received_datacap_change: client.receivedDatacapChange,
-          region: client.region,
-          retries: client.retries,
-          top_provider: client.topProvider,
-          used_datacap_change: client.usedDatacapChange,
-          used_dc: JSON.stringify(client.usedDc),
-          verifier_address_id: client.verifierAddressId,
-          verifier_name: client.verifierName,
-          website: JSON.stringify(client.website),
-          data: client.data,
-        })
-        .onConflict('address_id')
-        .merge();
-    }
-    cache.put(CACHE_KEY, allClients, CACHE_EXPIRATION_TIME);
-
-    if (res && res.json) {
-      return res.json({ ...allClients });
-    }
-
-    console.log(error, 'error occurred');
   }
+  //wait 8 seconds before the next request
+  await new Promise((resolve) => setTimeout(resolve, 8000));
+
+  for (const client of allClients) {
+    await DB('fil-user-explorer')
+      .insert({
+        address: client.address,
+        address_id: client.addressId,
+        allowance: client.allowance,
+        allowance_array: JSON.stringify(client.allowanceArray),
+        audit_trail: client.auditTrail,
+        create_message_timestamp: client.createMessageTimestamp,
+        create_at_height: client.createAtHeight,
+        deal_count: client.dealCount,
+        industry: client.industry,
+        initial_allowance: client.initialAllowance,
+        issue_create_timestamp: client.issueCreateTimestamp,
+        name: client.name,
+        org_name: client.orgName,
+        provider_count: client.providerCount,
+        received_datacap_change: client.receivedDatacapChange,
+        region: client.region,
+        retries: client.retries,
+        top_provider: client.topProvider,
+        used_datacap_change: client.usedDatacapChange,
+        used_dc: JSON.stringify(client.usedDc),
+        verifier_address_id: client.verifierAddressId,
+        verifier_name: client.verifierName,
+        website: JSON.stringify(client.website),
+        data: client.data,
+      })
+      .onConflict('address_id')
+      .merge();
+  }
+  cache.put(CACHE_KEY, allClients, CACHE_EXPIRATION_TIME);
+
+  setTimeout(() => {
+    APIFilecoinUserExplorer(req, res);
+  }, CACHE_EXPIRATION_TIME);
+
+  return res.json('success, data was saved to database');
+  // return res.json({ ...allClients });
 }
 
-setInterval(() => {
-  APIFilecoinUserExplorer();
-}, CACHE_EXPIRATION_TIME);
+APIFilecoinUserExplorer();
