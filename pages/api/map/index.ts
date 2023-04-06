@@ -4,7 +4,7 @@ import { isIP } from 'is-ip';
 import IPInfoWrapper, { LruCache } from 'node-ipinfo';
 import DB from '@common/db';
 
-const cacheKey = "map"
+const cacheKey = 'map';
 const cacheOptions = {
   max: 1,
   maxAge: 24 * 1000 * 60 * 60, // 24h
