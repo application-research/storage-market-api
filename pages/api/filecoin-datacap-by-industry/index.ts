@@ -7,7 +7,7 @@ import cache from 'memory-cache';
 const CACHE_KEY = 'fil-user-explorer-data';
 const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
-export default async function APIFilecoinUserExplorer(req, res) {
+export default async function APIFilecoinUserExplorerByIndustry(req, res) {
   const cachedData = cache.get(CACHE_KEY);
 
   if (cachedData) {
@@ -25,7 +25,7 @@ export default async function APIFilecoinUserExplorer(req, res) {
   const limit = 49;
   let allClients = [];
 
-  while (page < 30) {
+  while (page < 100) {
     const res = await fetch(
       `https://api.datacapstats.io/api/getVerifiedClientsExtended?page=${page}&limit=${limit}&intervalStartTimestamp=${intervalStartTimestamp}&intervalEndTimestamp=${intervalEndTimestamp}`
     );
@@ -45,34 +45,17 @@ export default async function APIFilecoinUserExplorer(req, res) {
   await new Promise((resolve) => setTimeout(resolve, 8000));
 
   for (const client of allClients) {
-    await DB('fil-user-explorer')
+    await DB('fil-user-explorer-region')
       .insert({
-        address: client.address,
-        address_id: client.addressId,
-        allowance: client.allowance,
-        allowance_array: JSON.stringify(client.allowanceArray),
-        audit_trail: client.auditTrail,
-        create_message_timestamp: client.createMessageTimestamp,
-        create_at_height: client.createAtHeight,
-        deal_count: client.dealCount,
+        id: client.id,
+        outgoing_datacap: client.outgoingDatacap,
+        incoming_datacap: client.incomingDatacap,
         industry: client.industry,
-        initial_allowance: client.initialAllowance,
-        issue_create_timestamp: client.issueCreateTimestamp,
-        name: client.name,
-        org_name: client.orgName,
-        provider_count: client.providerCount,
-        received_datacap_change: client.receivedDatacapChange,
-        region: client.region,
-        retries: client.retries,
-        top_provider: client.topProvider,
-        used_datacap_change: client.usedDatacapChange,
-        used_dc: JSON.stringify(client.usedDc),
-        verifier_address_id: client.verifierAddressId,
-        verifier_name: client.verifierName,
-        website: JSON.stringify(client.website),
+        year: client.year,
+        week: client.week,
         data: client.data,
       })
-      .onConflict('address_id')
+      .onConflict('id')
       .merge();
   }
   cache.put(CACHE_KEY, allClients, CACHE_EXPIRATION_TIME);
