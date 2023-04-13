@@ -20,17 +20,18 @@ async function sleep(ms) {
 async function run() {
   let storageProviders = [];
   // const filrep = await fetch('https://api.filrep.io/api/v1/miners');
-  const estuary = await fetch('https://api.estuary.tech/public/miners');
   // let json = await filrep.json();
   // storageProviders = [...storageProviders, ...json.miners];
-  json = await estuary.json();
 
+  const estuary = await fetch('https://api.estuary.tech/public/miners');
+  json = await estuary.json();
   let estuaryProviders = [];
   Object.keys(json).forEach((key) => {
     estuaryProviders.push(json[key]);
   });
 
   storageProviders = [...storageProviders, ...estuaryProviders];
+  console.log(storageProviders, 'storage providers');
 
   /*
   const client = Lotus.getClient();

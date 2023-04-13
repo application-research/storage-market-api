@@ -17,28 +17,29 @@ export default async function APIFilecoinUserExplorer(req, res) {
 
   await Server.cors(req, res);
   const currentDate = new Date();
-  const intervalEndTimestamp = Math.floor(currentDate.getTime() / 1000);
-  const secondsInTenWeeks = 10 * 7 * 24 * 60 * 60;
-  const intervalStartTimestamp = intervalEndTimestamp - secondsInTenWeeks;
+  const intervalEndTimestamp = Math.round(currentDate.getTime() / 1000);
+  const secondsInAYear = 31536000;
+  const intervalStartTimestamp = intervalEndTimestamp - secondsInAYear;
+
   let page = 1;
   const limit = 49;
   let allClients = [];
 
-  while (true) {
-    const response = await fetch(
+  while (page < 30) {
+    const res = await fetch(
       `https://api.datacapstats.io/api/getVerifiedClientsExtended?page=${page}&limit=${limit}&intervalStartTimestamp=${intervalStartTimestamp}&intervalEndTimestamp=${intervalEndTimestamp}`
     );
 
-    const data = await response.json();
-    const clients = data.data;
+    const clients = await res.json();
     console.log(clients);
-
-    if (clients.length === 0) {
+    if (clients.data.length === 0) {
       break;
     }
 
-    allClients = allClients.concat(clients);
+    allClients = allClients.concat(clients.data);
     page++;
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
   }
   //wait 8 seconds before the next request
   await new Promise((resolve) => setTimeout(resolve, 8000));

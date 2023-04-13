@@ -72,11 +72,10 @@ export default async function Page(props) {
 
       <div className={styles.row}>
         <h6 className={styles.heading}>
-          get details on each storage provider that has stored data on Estuary ({count}) {" "}
+          get details on each storage provider that has stored data on Estuary ({count}){' '}
           <a className={styles.link} href={mapUrl} target="_blank">
             &#128506; View Map
           </a>
-          
         </h6>
 
         {listElements}
