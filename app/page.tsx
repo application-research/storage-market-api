@@ -34,6 +34,15 @@ export default async function Page(props) {
   return (
     <DefaultLayout>
       <div className={styles.row}>
+        <h6 className={styles.heading}>Get global performance of our Filecoin storage deal tools.</h6>
+        <div>
+          <a className={styles.link} href="https://data.storage.market/api/delta" target="_blank">
+            ➝ https://data.storage.market/api/delta
+          </a>
+        </div>
+      </div>
+
+      <div className={styles.row}>
         <h6 className={styles.heading}>get the current Filecoin price (powered by IEXCloud) or convert attoFil to USD and Filecoin.</h6>
         <div>
           <a className={styles.link} href="https://data.storage.market/api/market/filecoin?attofil=6643845374681246791213" target="_blank">
@@ -72,11 +81,10 @@ export default async function Page(props) {
 
       <div className={styles.row}>
         <h6 className={styles.heading}>
-          get details on each storage provider that has stored data on Estuary ({count}) {" "}
+          get details on each storage provider that has stored data on Estuary ({count}){' '}
           <a className={styles.link} href={mapUrl} target="_blank">
             &#128506; View Map
           </a>
-          
         </h6>
 
         {listElements}
