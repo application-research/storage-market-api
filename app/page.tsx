@@ -34,7 +34,7 @@ export default async function Page(props) {
   return (
     <DefaultLayout>
       <div className={styles.row}>
-        <h6 className={styles.heading}>Get global performance of our Filecoin storage deal tools.</h6>
+        <h6 className={styles.heading}>get global performance of our Filecoin storage deal tools.</h6>
         <div>
           <a className={styles.link} href="https://data.storage.market/api/delta" target="_blank">
             ➝ https://data.storage.market/api/delta
