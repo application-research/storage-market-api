@@ -136,7 +136,6 @@ async function run() {
     total_number_of_unique_delta_nodes: queryResponse.total_number_of_unique_delta_nodes,
   };
 
-  /*
   await Utilities.runQuery({
     queryFn: async () => {
       const save = await DB.insert({
@@ -151,7 +150,6 @@ async function run() {
     },
     label: `WRITE_DELTA_DATA`,
   });
-  */
 
   const url = process.env.SLACK_WEB_HOOK_URL;
   await sendMessage({ url, store });
