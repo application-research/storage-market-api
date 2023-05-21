@@ -1,0 +1,54 @@
+.body {
+}
+
+.text {
+  font-size: 1rem;
+  padding: 16px 16px 32px 16px;
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  p {
+    margin-top: 12px;
+    font-size: 1rem;
+  }
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.left {
+  height: 16px;
+  width: 32px;
+}
+
+.right {
+  text-align: left;
+  padding-left: 8px;
+  font-size: 10px;
+  min-width: 10%;
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.col {
+  width: 25%;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  text-align: left;
+  padding: 4px 24px 4px 16px;
+}

@@ -5,6 +5,7 @@ import { headers } from 'next/headers';
 import '@root/global.scss';
 import styles from '@root/general-styles.module.scss';
 import DefaultLayout from '@components/DefaultLayout';
+import DataComponents from '@components/DataComponents';
 
 async function makeRequest({ host, endpoint }) {
   try {
@@ -20,6 +21,7 @@ export default async function Page(props) {
   const currentHeaders = headers();
   const { storageProviders, count } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'providers' });
   const { mapUrl } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'map' });
+  const { clients } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'clients' });
 
   const listElements = storageProviders.map((each) => {
     return (
@@ -31,8 +33,10 @@ export default async function Page(props) {
     );
   });
 
+  const leftElement = <DataComponents clients={clients} />;
+
   return (
-    <DefaultLayout>
+    <DefaultLayout left={leftElement}>
       <div className={styles.row}>
         <h6 className={styles.heading}>get global performance of our Filecoin storage deal tools.</h6>
         <div>
@@ -73,7 +77,7 @@ export default async function Page(props) {
       </div>
 
       <div className={styles.row}>
-        <h6 className={styles.heading}>get every storage provider we think we could make deals with (4000+).</h6>
+        <h6 className={styles.heading}>every storage provider we could make deals with (4000+) but haven't tried.</h6>
         <a className={styles.link} href="https://data.storage.market/api/providers/all" target="_blank">
           ➝ https://data.storage.market/api/providers/all
         </a>
@@ -81,7 +85,7 @@ export default async function Page(props) {
 
       <div className={styles.row}>
         <h6 className={styles.heading}>
-          get details on each storage provider that has stored data on Estuary ({count}){' '}
+          every storage provider Filecoin Data Tools (https://filecoindata.tools) makes deals with ({count}){' '}
           <a className={styles.link} href={mapUrl} target="_blank">
             &#128506; View Map
           </a>
