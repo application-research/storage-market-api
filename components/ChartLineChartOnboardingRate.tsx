@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// NOTE(jim): Bind to time series
+// NOTE(jim): Rip out the hardcoding after the meeting on monday.
 const data = [
   {
     name: '5/13',
