@@ -21,6 +21,7 @@ export default function ChartBarChartClients(props) {
         <BarChart width={500} height={300} data={data} margin={{ left: 16, right: 16 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="id" />
+          <YAxis />
           <Tooltip />
           <Legend />
           <Bar dataKey="amount_onboarded_tb" stackId="a" fill="#0047FF" />
