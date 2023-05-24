@@ -92,6 +92,15 @@ export default async function Page(props) {
   return (
     <DefaultLayout left={leftElement}>
       <div className={styles.row}>
+        <h6 className={styles.heading}>get all Filecoin addresses using Delta.</h6>
+        <div>
+          <a className={styles.link} href="https://data.storage.market/api/delta/addresses" target="_blank">
+            ➝ https://data.storage.market/api/delta/addresses
+          </a>
+        </div>
+      </div>
+
+      <div className={styles.row}>
         <h6 className={styles.heading}>get global performance of our Filecoin storage deal tools.</h6>
         <div>
           <a className={styles.link} href="https://data.storage.market/api/delta" target="_blank">

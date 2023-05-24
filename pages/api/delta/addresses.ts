@@ -17,7 +17,7 @@ echo f1jxx7uendecy62l2m7w7tyo5d7wszysp467xztfy | xargs printf '{ "jsonrpc": "2.0
 
 */
 
-export default async function APIGlobalDeltaIndex(req, res) {
+export default async function APIGlobalAddressTracker(req, res) {
   await Server.cors(req, res);
 
   res.json({
