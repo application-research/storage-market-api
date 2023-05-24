@@ -46,9 +46,14 @@
 }
 
 .col {
-  width: 25%;
+  width: 20%;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   text-align: left;
   padding: 4px 24px 4px 16px;
+}
+
+.table {
+  margin-top: 16px;
+  display: block;
 }
