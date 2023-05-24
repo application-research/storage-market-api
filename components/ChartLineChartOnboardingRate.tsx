@@ -16,9 +16,9 @@ export default function ChartLineChartOnboardingRate(props) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="hypothetical_onboarding_data_terabytes" stroke="#BF40BF" />
           <Line type="monotone" dataKey="target_onboarding_rate_terabytes" stroke="#ff5349" />
           <Line type="monotone" dataKey="daily_onboarding_rate_terabytes" stroke="#0047FF" />
+          <Line type="monotone" dataKey="hypothetical_onboarding_data_terabytes" stroke="#BF40BF" />
         </LineChart>
       </ResponsiveContainer>
     </div>

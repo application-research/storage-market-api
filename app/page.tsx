@@ -139,7 +139,7 @@ export default async function Page(props) {
 
       <div className={styles.row}>
         <h6 className={styles.heading}>
-          every storage provider Filecoin Data Tools (https://filecoindata.tools) makes deals with ({count}){' '}
+          every storage provider Filecoin Data Tools (https://filecoindata.tools) has made successful deals with ({count}){' '}
           <a className={styles.link} href={mapUrl} target="_blank">
             &#128506; View Map
           </a>

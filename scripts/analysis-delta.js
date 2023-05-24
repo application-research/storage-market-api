@@ -41,7 +41,7 @@ const sendMessage = async ({ store, url }) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `👋 Hey! I have a report for you on the Outercore:Engineering effort to onboard data to the Filecoin Network since 2023-05-01.\n\n*Keep up the good work team team!*\n\n`,
+            text: `👋 Hey! I have a report for you on the Outercore:Engineering effort to onboard data to the Filecoin Network since 2023-05-01 which was ${daysDiff} ago.\n\n*Keep up the good work team team!*\n\n`,
           },
         },
         {
@@ -51,35 +51,21 @@ const sendMessage = async ({ store, url }) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `\n\nAre you interested in getting some infrastructure setup so you can store data on Filecoin? If so let us know what domain name you want and we'll set you up with the following:\n\n\n🦤 *YOUR_NAME_HERE.edge.estuary.tech*\n_Your personal IPFS gateway for retrieval._\n🧾 *YOUR_NAME_HERE.registry.estuary.tech*\n_A list of every deal thats made on Filecoin, think of its as a receipt you can show anyone._\n🌐 *YOUR_NAME_HERE.delta.estuary.tech*\n_Your API node we run for you, easy to integrate into any application._\n\n\nPing Wings and we will get this started if we think your use case provides valuable data to the network. If you are onboarding large data-sets (10PIB+), ping Json, our resident storage provider.`,
-          },
-        },
-        {
-          type: 'divider',
-        },
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: `\n\n*Unique Delta Nodes ➝* ${countDeltaNodes}\n_Our goal here is 10000 of these nodes running in the wild, managed by people we don't even know._\n\n`,
+            text: `\n\n*Unique Delta Nodes ➝* ${countDeltaNodes}\n\n`,
           },
         },
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Participating Storage Providers ➝* ${countSPs}\n_Do you want to work with us? We will work with anyone to make deals. Ping Alvin!_\n\n`,
+            text: `*Participating Storage Providers ➝* ${countSPs}\n\n`,
           },
         },
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Total data onboarded onto the Filecoin Network ➝* ${Utilities.bytesToSize(
-              store.total_deals_succeeded_size
-            )}\n_If we get to 10000 Delta Nodes, theroetically we could have onboarded ${Utilities.bytesToSize(
-              (store.total_deals_succeeded_size / countDeltaNodes) * 10000
-            )} if we had that many nodes in the wild._\n\n`,
+            text: `*Total data onboarded onto the Filecoin Network ➝* ${Utilities.bytesToSize(store.total_deals_succeeded_size)}\n\n`,
           },
         },
         {
@@ -97,10 +83,7 @@ const sendMessage = async ({ store, url }) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Daily onboarding rate to Filecoin Network ➝* ${Utilities.bytesToSize(
-              store.total_deals_succeeded_size / daysDiff
-            )}\n_We have to get this number up to a petabyte a day. We are ${(store.total_deals_succeeded_size / daysDiff / 1125899906842624) *
-              100}% of the way there since we started ${daysDiff} ago._\n\n`,
+            text: `*Daily onboarding rate to Filecoin Network ➝* ${Utilities.bytesToSize(store.total_deals_succeeded_size / daysDiff)}\n\n`,
           },
         },
       ],
