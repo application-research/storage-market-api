@@ -12,8 +12,6 @@ const ChartLineChartCulminativeOnboarding = dynamic(() => import('@components/Ch
 const ChartLineChartEntities = dynamic(() => import('@components/ChartLineChartEntities'), { ssr: false });
 
 export default function DataComponents(props) {
-  console.log(props.clients);
-
   return (
     <div className={styles.body}>
       <section className={styles.text}>
@@ -53,7 +51,7 @@ export default function DataComponents(props) {
           }
 
           return (
-            <div className={styles.row} style={rowStyle}>
+            <div className={styles.row} style={rowStyle} key={each.id}>
               <div className={styles.col} style={{ width: '10%' }}>
                 {each.id}
               </div>
