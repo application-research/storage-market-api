@@ -37,8 +37,8 @@ export default function DataComponents(props) {
 
       <section className={styles.table}>
         {props.clients.map((each) => {
-          const isComplete = each.total_data_onboarded_tb === each.total_potential_tb;
-          const isPhaseComplete = each.total_data_to_onboard_tb === each.total_data_onboarded_tb;
+          const isComplete = each.total_data_onboarded_tb > 0 && each.total_data_onboarded_tb === each.total_potential_tb;
+          const isPhaseComplete = each.total_data_onboarded_tb > 0 && each.total_data_to_onboard_tb === each.total_data_onboarded_tb;
 
           let rowStyle = null;
 

@@ -37,7 +37,7 @@ const data = [
     onboarded_data_terabytes: 52.8,
     target_onboarded_data_terabytes: 10000,
     hypothetical_onboarding_data_terabytes: (52.8 / 148 / 15) * 1000,
-    daily_onboarding_rate_terabytes: 52.78 / 15,
+    daily_onboarding_rate_terabytes: 52.8 / 15,
   },
   {
     name: '5/18',
@@ -47,7 +47,7 @@ const data = [
     onboarded_data_terabytes: 53.12,
     target_onboarded_data_terabytes: 10000,
     hypothetical_onboarding_data_terabytes: (53.12 / 162 / 18) * 1000,
-    daily_onboarding_rate_terabytes: 52.78 / 18,
+    daily_onboarding_rate_terabytes: 53.12 / 18,
   },
   {
     name: '5/21',
@@ -57,7 +57,7 @@ const data = [
     onboarded_data_terabytes: 53.24,
     target_onboarded_data_terabytes: 10000,
     hypothetical_onboarding_data_terabytes: (53.24 / 162 / 21) * 1000,
-    daily_onboarding_rate_terabytes: 52.78 / 21,
+    daily_onboarding_rate_terabytes: 53.24 / 21,
   },
   {
     name: '5/23',
@@ -67,7 +67,17 @@ const data = [
     onboarded_data_terabytes: 53.26,
     target_onboarded_data_terabytes: 10000,
     hypothetical_onboarding_data_terabytes: (53.26 / 162 / 23) * 1000,
-    daily_onboarding_rate_terabytes: 52.78 / 23,
+    daily_onboarding_rate_terabytes: 53.26 / 23,
+  },
+  {
+    name: '5/24',
+    total_delta_nodes: 162,
+    total_storage_providers: 117,
+    target_onboarding_rate_terabytes: 300,
+    onboarded_data_terabytes: 53.49,
+    target_onboarded_data_terabytes: 10000,
+    hypothetical_onboarding_data_terabytes: (53.49 / 162 / 24) * 1000,
+    daily_onboarding_rate_terabytes: 53.49 / 23,
   },
 ];
 

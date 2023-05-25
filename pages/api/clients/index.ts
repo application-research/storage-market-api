@@ -12,10 +12,6 @@ export default async function APIGetSpreadSheet(req, res) {
   let id = 0;
   for (let row of rows) {
     if (row['api_ready'] === 'TRUE') {
-      if (!['🟢', '⚫', '💗', '🔵'].includes(row['Status'])) {
-        continue;
-      }
-
       id += 1;
 
       clients.push({
