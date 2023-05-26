@@ -21,7 +21,7 @@ export async function getRowData() {
   return rows;
 }
 
-export async function getSheetMultiple(index) {
+export async function getSheetMultiple() {
   const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
   const private_key = _.replace(process.env.GOOGLE_PRIVATE_KEY, new RegExp('\\\\n', 'g'), '\n');
