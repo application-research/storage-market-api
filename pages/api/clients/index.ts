@@ -33,20 +33,20 @@ export default async function APIGetSpreadSheet(req, res) {
   const phases = [];
   for (let row2 of phaseRows) {
     if (row2['DATE'] !== 'DATE') {
-      if (!row2['1']) {
+      if (!row2['Phase 1']) {
         continue;
       }
 
       phases.push({
         date: row2['DATE'],
-        phase_1: Number(row2['1']),
-        phase_2: Number(row2['2']),
-        phase_3: Number(row2['3']),
-        phase_4: Number(row2['4']),
-        phase_5: Number(row2['5']),
-        phase_6: Number(row2['6']),
-        phase_7: Number(row2['7']),
-        phase_8: Number(row2['8']),
+        phase_1: Number(row2['Phase 1']),
+        phase_2: Number(row2['Phase 2']),
+        phase_3: Number(row2['Phase 3']),
+        phase_4: Number(row2['Phase 4']),
+        phase_5: Number(row2['Phase 5']),
+        phase_6: Number(row2['Phase 6']),
+        phase_7: Number(row2['Phase 7']),
+        phase_8: Number(row2['Phase 8']),
       });
     }
   }

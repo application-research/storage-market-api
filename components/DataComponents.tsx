@@ -15,8 +15,6 @@ const ChartLineChartEntities = dynamic(() => import('@components/ChartLineChartE
 const ChartBarChartMacro = dynamic(() => import('@components/ChartBarChartMacro'), { ssr: false });
 
 export default function DataComponents(props) {
-  console.log(props.phases);
-
   return (
     <div className={styles.body}>
       <div className={styles.top}>
@@ -90,11 +88,9 @@ export default function DataComponents(props) {
             rowStyle = { background: `#39FF14` };
           }
 
-          console.log(each);
-
           return (
-            <React.Fragment>
-              <div className={styles.row} style={rowStyle} key={each.id}>
+            <div key={each.id}>
+              <div className={styles.row} style={rowStyle}>
                 <div className={styles.col} style={{ width: '10%' }}>
                   {each.id}
                 </div>
@@ -134,7 +130,7 @@ export default function DataComponents(props) {
                   </div>
                 </div>
               ) : null}
-            </React.Fragment>
+            </div>
           );
         })}
       </section>

@@ -38,6 +38,5 @@ export async function getSheetMultiple() {
 
   const phasesSheet = doc.sheetsByIndex[2];
   const secondRows = await phasesSheet.getRows();
-
   return { clientRows: rows, phaseRows: secondRows };
 }
