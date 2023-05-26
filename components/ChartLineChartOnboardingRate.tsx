@@ -10,7 +10,7 @@ export default function ChartLineChartOnboardingRate(props) {
   return (
     <div className={styles.body}>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart width={500} height={300} data={props.data} margin={{ left: 16, right: 16 }}>
+        <LineChart width={500} height={200} data={props.data} margin={{ left: 16, right: 16 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />

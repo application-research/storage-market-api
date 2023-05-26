@@ -1,6 +1,12 @@
 .body {
 }
 
+.top {
+  color: #fff;
+  background: #222;
+  padding-bottom: 48px;
+}
+
 .text {
   font-size: 1rem;
   padding: 16px 16px 32px 16px;
@@ -13,6 +19,14 @@
   p {
     margin-top: 12px;
     font-size: 1rem;
+  }
+
+  .mono {
+    font-family: 'Mono';
+    font-size: 10px;
+    margin-top: 6px;
+    padding-left: 1px;
+    opacity: 0.8;
   }
 }
 
@@ -38,11 +52,12 @@
 }
 
 .row {
+  font-family: 'Mono';
   width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .col {

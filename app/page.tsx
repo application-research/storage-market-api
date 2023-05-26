@@ -17,7 +17,7 @@ async function makeRequest({ host, endpoint }) {
   }
 }
 
-// NOTE(jim): Rip out the hardcoding after the meeting on wednesday.
+// NOTE(jim): Rip out the hardcoding after the meeting on friday.
 const data = [
   {
     name: '5/13',
@@ -79,13 +79,23 @@ const data = [
     hypothetical_onboarding_data_terabytes: (53.49 / 162 / 24) * 1000,
     daily_onboarding_rate_terabytes: 53.49 / 23,
   },
+  {
+    name: '5/25',
+    total_delta_nodes: 162,
+    total_storage_providers: 122,
+    target_onboarding_rate_terabytes: 300,
+    onboarded_data_terabytes: 53.86,
+    target_onboarded_data_terabytes: 10000,
+    hypothetical_onboarding_data_terabytes: (53.86 / 162 / 25) * 1000,
+    daily_onboarding_rate_terabytes: 53.86 / 23,
+  },
 ];
 
 export default async function Page(props) {
   const currentHeaders = headers();
   const { storageProviders, count } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'providers' });
   const { mapUrl } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'map' });
-  const { clients } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'clients' });
+  const { clients, phases } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'clients' });
 
   const listElements = storageProviders.map((each) => {
     return (
@@ -97,7 +107,7 @@ export default async function Page(props) {
     );
   });
 
-  const leftElement = <DataComponents data={data} clients={clients} />;
+  const leftElement = <DataComponents data={data} clients={clients} phases={phases} />;
 
   return (
     <DefaultLayout left={leftElement}>
