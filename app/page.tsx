@@ -77,7 +77,7 @@ const data = [
     onboarded_data_terabytes: 53.49,
     target_onboarded_data_terabytes: 10000,
     hypothetical_onboarding_data_terabytes: (53.49 / 162 / 24) * 1000,
-    daily_onboarding_rate_terabytes: 53.49 / 23,
+    daily_onboarding_rate_terabytes: 53.49 / 24,
   },
   {
     name: '5/25',
@@ -87,7 +87,17 @@ const data = [
     onboarded_data_terabytes: 53.86,
     target_onboarded_data_terabytes: 10000,
     hypothetical_onboarding_data_terabytes: (53.86 / 162 / 25) * 1000,
-    daily_onboarding_rate_terabytes: 53.86 / 23,
+    daily_onboarding_rate_terabytes: 53.86 / 25,
+  },
+  {
+    name: '5/26',
+    total_delta_nodes: 162,
+    total_storage_providers: 122,
+    target_onboarding_rate_terabytes: 300,
+    onboarded_data_terabytes: 55.6,
+    target_onboarded_data_terabytes: 10000,
+    hypothetical_onboarding_data_terabytes: (55.6 / 162 / 26) * 1000,
+    daily_onboarding_rate_terabytes: 55.6 / 26,
   },
 ];
 
