@@ -99,6 +99,16 @@ const data = [
     hypothetical_onboarding_data_terabytes: (55.6 / 162 / 26) * 1000,
     daily_onboarding_rate_terabytes: 55.6 / 26,
   },
+  {
+    name: '5/28',
+    total_delta_nodes: 162,
+    total_storage_providers: 122,
+    target_onboarding_rate_terabytes: 300,
+    onboarded_data_terabytes: 60.18,
+    target_onboarded_data_terabytes: 10000,
+    hypothetical_onboarding_data_terabytes: (60.18 / 162 / 28) * 1000,
+    daily_onboarding_rate_terabytes: 60.18 / 28,
+  },
 ];
 
 export default async function Page(props) {
