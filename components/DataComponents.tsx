@@ -20,31 +20,6 @@ export default function DataComponents(props) {
       <div className={styles.top}>
         <section className={styles.text}>
           <p>Overview</p>
-          <p className={styles.mono} style={{ color: '#00FF00' }}>
-            Phase 1 ➝ Clients that have fully onboarded their data.
-          </p>
-          <p className={styles.mono} style={{ color: '#FF00FF' }}>
-            Phase 2 ➝ Clients that are currently onboarding all of their data.
-          </p>
-          <p className={styles.mono} style={{ color: '#00FFFF' }}>
-            Phase 3 ➝ Clients that have finished a successful POC, need to share socially and need to have a conversation about our stack.
-          </p>
-          <p className={styles.mono} style={{ color: '#C9DAF8' }}>
-            Phase 4 ➝ Clients that are in the middle of a POC, their first phase of onboarding.
-          </p>
-          <p className={styles.mono} style={{ color: '#FFE598' }}>
-            Phase 5 ➝ Clients that have not started onboarding their data, but they have come up with some reason such as DataCap, gas fees, or some schedule they would like to
-            adhere to.
-          </p>
-          <p className={styles.mono} style={{ color: '#F9CB9C' }}>
-            Phase 6 ➝ Clients that are not sure, and require a follow up meeting.
-          </p>
-          <p className={styles.mono} style={{ color: '#F4CCCC' }}>
-            Phase 7 ➝ Clients that currently have no interest in Filecoin.
-          </p>
-          <p className={styles.mono} style={{ color: '#FF0100' }}>
-            Phase 8 ➝ Clients that have rejected the notion of using us completely.
-          </p>
         </section>
         <ChartBarChartMacro data={props.phases} />
       </div>

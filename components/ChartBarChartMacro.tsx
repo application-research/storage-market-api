@@ -22,14 +22,15 @@ export default function ChartBarChartMarco(props) {
           <YAxis />
           <Tooltip contentStyle={{ backgroundColor: '#000' }} />
           <Legend />
-          <Bar dataKey="phase_8" stackId="a" fill="#FF0100" />
-          <Bar dataKey="phase_7" stackId="a" fill="#F4CCCC" />
-          <Bar dataKey="phase_6" stackId="a" fill="#F9CB9C" />
-          <Bar dataKey="phase_5" stackId="a" fill="#FFE598" />
-          <Bar dataKey="phase_4" stackId="a" fill="#C9DAF8" />
-          <Bar dataKey="phase_3" stackId="a" fill="#00FFFF" />
-          <Bar dataKey="phase_2" stackId="a" fill="#FF00FF" />
-          <Bar dataKey="phase_1" stackId="a" fill="#00FF00" />
+          <Bar dataKey="blocked_education" stackId="a" fill="#F9CB9C" />
+          <Bar dataKey="blocked_setup" stackId="a" fill="#FCE4CD" />
+          <Bar dataKey="blocked_data_prep" stackId="a" fill="#F1C231" />
+          <Bar dataKey="blocked_application" stackId="a" fill="#FFD866" />
+          <Bar dataKey="blocked_notary" stackId="a" fill="#FFE598" />
+          <Bar dataKey="onboarding" stackId="a" fill="#D0DFE2" />
+          <Bar dataKey="done_poc" stackId="a" fill="#00FFFF" />
+          <Bar dataKey="onboarding_remaining" stackId="a" fill="#B6D7A8" />
+          <Bar dataKey="done" stackId="a" fill="#00FF00" />
         </BarChart>
       </ResponsiveContainer>
     </div>

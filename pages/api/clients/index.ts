@@ -33,20 +33,25 @@ export default async function APIGetSpreadSheet(req, res) {
   const phases = [];
   for (let row2 of phaseRows) {
     if (row2['DATE'] !== 'DATE') {
-      if (!row2['Phase 1']) {
+      if (!row2['Done']) {
         continue;
       }
 
       phases.push({
         date: row2['DATE'],
-        phase_1: Number(row2['Phase 1']),
-        phase_2: Number(row2['Phase 2']),
-        phase_3: Number(row2['Phase 3']),
-        phase_4: Number(row2['Phase 4']),
-        phase_5: Number(row2['Phase 5']),
-        phase_6: Number(row2['Phase 6']),
-        phase_7: Number(row2['Phase 7']),
-        phase_8: Number(row2['Phase 8']),
+        done: Number(row2['Done']),
+        onboarding_remaining: Number(row2['Onboarding-Remaining']),
+        done_poc: Number(row2['Done-POC']),
+        onboarding: Number(row2['Onboarding']),
+        blocked_notary: Number(row2['Blocked-Notary']),
+        blocked_application: Number(row2['Blocked-Application']),
+        blocked_data_prep: Number(row2['Blocked-DataPrep']),
+        blocked_setup: Number(row2['Blocked-Setup']),
+        blocked_education: Number(row2['Blocked-Education']),
+        client_deciding: Number(row2['Client-Deciding']),
+        client_interest: Number(row2['Client-Interest']),
+        client_awareness: Number(row2['Client-Awareness']),
+        dead_on_arrival: Number(row2['Dead-On-Arrival']),
       });
     }
   }
