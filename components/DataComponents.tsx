@@ -57,7 +57,10 @@ export default function DataComponents(props) {
 
       <section className={styles.text}>
         <p>Onboarding rate (TB)</p>
-        <p className={styles.mono}>We're aiming to get to 300 TB of onboarding a day.</p>
+        <p className={styles.mono}>
+          We're aiming to get to 300 TB of onboarding a day. Hypothetical onboarding rate is taking the average performance of a single Delta node and assuming there are a thousand
+          nodes running.
+        </p>
       </section>
       <ChartLineChartOnboardingRate data={history} />
 
