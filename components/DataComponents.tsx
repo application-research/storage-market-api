@@ -13,23 +13,23 @@ const ChartBarChartMacro = dynamic(() => import('@components/ChartBarChartMacro'
 export default function DataComponents(props) {
   const history = props.history.map((each) => {
     const targetDate = new Date(each.created_at);
-    const currentDate = new Date();
-    const timeDiff = currentDate.getTime() - targetDate.getTime();
-    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const daysAgo = Utilities.getDaysAgoFromToday(each.created_at);
     const onboarded_data_terabytes = Utilities.bytesToTerabytes(each.total_deals_succeeded_size);
+    const total_delta_nodes = Number(each.total_number_of_unique_delta_nodes);
+    const daily_onboarding_rate_terabytes = onboarded_data_terabytes / (daysAgo + 1);
 
     return {
       ...each,
       name: `${targetDate.getMonth() + 1}/${targetDate.getDate()}`,
-      days_ago: daysDiff,
-      total_delta_nodes: each.total_number_of_unique_delta_nodes,
+      total_delta_nodes,
+      days_ago: daysAgo,
       total_storage_providers: each.total_number_of_sps_worked_with,
       onboarded_data_terabytes,
       target_onboarding_rate_terabytes: 300,
       target_onboarded_data_terabytes: 100,
       human_onboarded_data_terabytes: Utilities.bytesToSize(each.total_deals_succeeded_size),
-      hypothetical_onboarding_data_terabytes: (onboarded_data_terabytes / each.total_number_of_unique_delta_nodes / daysDiff) * 1000,
-      daily_onboarding_rate_terabytes: onboarded_data_terabytes / daysDiff,
+      hypothetical_onboarding_data_terabytes: (daily_onboarding_rate_terabytes / total_delta_nodes) * 1000,
+      daily_onboarding_rate_terabytes,
     };
   });
 

@@ -4,6 +4,21 @@ function print({ address, copy }) {
   console.log(`\x1b[1m\x1b[37m\[${address}\]\x1b[0m : ${copy}`);
 }
 
+export function getDaysAgoFromToday(startDate) {
+  const start = new Date(startDate);
+  const end = new Date();
+
+  const startUTC = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
+  const endUTC = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
+
+  const dayInMilliseconds = 1000 * 60 * 60 * 24;
+  const diffInMilliseconds = endUTC - startUTC;
+
+  const diffInDays = Math.floor(diffInMilliseconds / dayInMilliseconds);
+
+  return diffInDays;
+}
+
 export const runQuery = async ({ queryFn, errorFn, label }) => {
   let response;
   try {
@@ -31,8 +46,8 @@ export const toDateISOString = (data: string): string => {
 };
 
 export function bytesToTerabytes(bytes) {
-  const terabytes = bytes / 1024 ** 4;
-  return terabytes.toFixed(2);
+  const terabytes = bytes / (1024 * 1024 * 1024 * 1024);
+  return Number(terabytes.toFixed(2));
 }
 
 export const bytesToSize = (bytes: number, decimals: number = 2): string => {

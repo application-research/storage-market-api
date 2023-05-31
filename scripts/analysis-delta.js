@@ -19,7 +19,8 @@ const sendMessage = async ({ store, url }) => {
   const targetDate = new Date('2023-05-01');
   const currentDate = new Date();
   const timeDiff = currentDate.getTime() - targetDate.getTime();
-  const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  // +1 to handle zero.
+  const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
 
   const countDeltaNodes = store.total_number_of_unique_delta_nodes ? store.total_number_of_unique_delta_nodes : 100;
 
