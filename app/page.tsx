@@ -55,6 +55,11 @@ export default async function Page(props) {
             ➝ https://data.storage.market/api/delta
           </a>
         </div>
+        <div>
+          <a className={styles.link} href="https://data.storage.market/api/clients/history" target="_blank">
+            ➝ https://data.storage.market/api/clients/history
+          </a>
+        </div>
       </div>
 
       <div className={styles.row}>
