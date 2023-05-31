@@ -1,20 +1,38 @@
 import styles from '@components/DataComponents.module.scss';
+import dynamic from 'next/dynamic';
 
 import * as React from 'react';
 import * as Utilities from '@common/utilities';
 
-import dynamic from 'next/dynamic';
-
 const ChartBarChartClients = dynamic(() => import('@components/ChartBarChartClients'), { ssr: false });
 const ChartLineChartOnboardingRate = dynamic(() => import('@components/ChartLineChartOnboardingRate'), { ssr: false });
-
 const ChartLineChartCulminativeOnboarding = dynamic(() => import('@components/ChartLineChartCulminativeOnboarding'), { ssr: false });
-
 const ChartLineChartEntities = dynamic(() => import('@components/ChartLineChartEntities'), { ssr: false });
-
 const ChartBarChartMacro = dynamic(() => import('@components/ChartBarChartMacro'), { ssr: false });
 
 export default function DataComponents(props) {
+  const history = props.history.map((each) => {
+    const targetDate = new Date(each.created_at);
+    const currentDate = new Date();
+    const timeDiff = currentDate.getTime() - targetDate.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const onboarded_data_terabytes = Utilities.bytesToTerabytes(each.total_deals_succeeded_size);
+
+    return {
+      ...each,
+      name: `${targetDate.getMonth() + 1}/${targetDate.getDate()}`,
+      days_ago: daysDiff,
+      total_delta_nodes: each.total_number_of_unique_delta_nodes,
+      total_storage_providers: each.total_number_of_sps_worked_with,
+      onboarded_data_terabytes,
+      target_onboarding_rate_terabytes: 300,
+      target_onboarded_data_terabytes: 100,
+      human_onboarded_data_terabytes: Utilities.bytesToSize(each.total_deals_succeeded_size),
+      hypothetical_onboarding_data_terabytes: (onboarded_data_terabytes / each.total_number_of_unique_delta_nodes / daysDiff) * 1000,
+      daily_onboarding_rate_terabytes: onboarded_data_terabytes / daysDiff,
+    };
+  });
+
   return (
     <div className={styles.body}>
       <div className={styles.top}>
@@ -29,19 +47,19 @@ export default function DataComponents(props) {
         <p className={styles.mono}>Entities that are running in the wild, this is where our data comes from.</p>
       </section>
 
-      <ChartLineChartEntities data={props.data} />
+      <ChartLineChartEntities data={history} />
 
       <section className={styles.text}>
         <p>Culminative data (TB)</p>
         <p className={styles.mono}>All the data onboarded by every Delta node on the internet. Our goal is 10 petabytes by the end of Q3.</p>
       </section>
-      <ChartLineChartCulminativeOnboarding data={props.data} />
+      <ChartLineChartCulminativeOnboarding data={history} />
 
       <section className={styles.text}>
         <p>Onboarding rate (TB)</p>
         <p className={styles.mono}>We're aiming to get to 300 TB of onboarding a day.</p>
       </section>
-      <ChartLineChartOnboardingRate data={props.data} />
+      <ChartLineChartOnboardingRate data={history} />
 
       <section className={styles.text}>
         <p>Clients</p>

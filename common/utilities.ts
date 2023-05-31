@@ -30,6 +30,11 @@ export const toDateISOString = (data: string): string => {
   });
 };
 
+export function bytesToTerabytes(bytes) {
+  const terabytes = bytes / 1024 ** 4;
+  return terabytes.toFixed(2);
+}
+
 export const bytesToSize = (bytes: number, decimals: number = 2): string => {
   if (bytes === 0) return '0 Bytes';
 

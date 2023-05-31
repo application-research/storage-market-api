@@ -16,16 +16,9 @@ function print({ address, copy }) {
 }
 
 const sendMessage = async ({ store, url }) => {
-  // Specify the target date
   const targetDate = new Date('2023-05-01');
-
-  // Get the current date
   const currentDate = new Date();
-
-  // Calculate the difference in milliseconds between the target date and the current date
   const timeDiff = currentDate.getTime() - targetDate.getTime();
-
-  // Convert the difference to days
   const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
   const countDeltaNodes = store.total_number_of_unique_delta_nodes ? store.total_number_of_unique_delta_nodes : 100;
@@ -83,7 +76,9 @@ const sendMessage = async ({ store, url }) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Daily onboarding rate to Filecoin Network ➝* ${Utilities.bytesToSize(store.total_deals_succeeded_size / daysDiff)}\n\n`,
+            text: `*Daily onboarding rate to Filecoin Network ➝* ${Utilities.bytesToSize(
+              store.total_deals_succeeded_size / daysDiff
+            )}\n_Hypothetically we could be onboarding ${Utilities.bytesToSize((store.total_deals_succeeded_size * 1000) / daysDiff)} once we scale out the tooling._\n\n`,
           },
         },
       ],
@@ -118,6 +113,16 @@ async function run() {
     total_number_of_sps_worked_with: queryResponse.total_number_of_sps_worked_with,
     total_number_of_unique_delta_nodes: queryResponse.total_number_of_unique_delta_nodes,
   };
+
+  if (!queryResponse.total_number_of_unique_delta_nodes) {
+    console.log('Could not query for total_number_of_unique_delta_nodes');
+    return process.exit(0);
+  }
+
+  if (!queryResponse.total_number_of_sps_worked_with) {
+    console.log('Could not query for total_number_of_sps_worked_with');
+    return process.exit(0);
+  }
 
   await Utilities.runQuery({
     queryFn: async () => {

@@ -17,115 +17,13 @@ async function makeRequest({ host, endpoint }) {
   }
 }
 
-// NOTE(jim): Rip out the hardcoding after the meeting on friday.
-const data = [
-  {
-    name: '5/13',
-    total_delta_nodes: 142,
-    total_storage_providers: 112,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 52.78,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (52.78 / 142 / 13) * 1000,
-    daily_onboarding_rate_terabytes: 52.78 / 13,
-  },
-  {
-    name: '5/15',
-    total_delta_nodes: 148,
-    total_storage_providers: 114,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 52.8,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (52.8 / 148 / 15) * 1000,
-    daily_onboarding_rate_terabytes: 52.8 / 15,
-  },
-  {
-    name: '5/18',
-    total_delta_nodes: 162,
-    total_storage_providers: 114,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 53.12,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (53.12 / 162 / 18) * 1000,
-    daily_onboarding_rate_terabytes: 53.12 / 18,
-  },
-  {
-    name: '5/21',
-    total_delta_nodes: 162,
-    total_storage_providers: 116,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 53.24,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (53.24 / 162 / 21) * 1000,
-    daily_onboarding_rate_terabytes: 53.24 / 21,
-  },
-  {
-    name: '5/23',
-    total_delta_nodes: 162,
-    total_storage_providers: 116,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 53.26,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (53.26 / 162 / 23) * 1000,
-    daily_onboarding_rate_terabytes: 53.26 / 23,
-  },
-  {
-    name: '5/24',
-    total_delta_nodes: 162,
-    total_storage_providers: 117,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 53.49,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (53.49 / 162 / 24) * 1000,
-    daily_onboarding_rate_terabytes: 53.49 / 24,
-  },
-  {
-    name: '5/25',
-    total_delta_nodes: 162,
-    total_storage_providers: 122,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 53.86,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (53.86 / 162 / 25) * 1000,
-    daily_onboarding_rate_terabytes: 53.86 / 25,
-  },
-  {
-    name: '5/26',
-    total_delta_nodes: 162,
-    total_storage_providers: 122,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 55.6,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (55.6 / 162 / 26) * 1000,
-    daily_onboarding_rate_terabytes: 55.6 / 26,
-  },
-  {
-    name: '5/28',
-    total_delta_nodes: 162,
-    total_storage_providers: 122,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 60.18,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (60.18 / 162 / 28) * 1000,
-    daily_onboarding_rate_terabytes: 60.18 / 28,
-  },
-  {
-    name: '5/29',
-    total_delta_nodes: 164,
-    total_storage_providers: 122,
-    target_onboarding_rate_terabytes: 300,
-    onboarded_data_terabytes: 63.74,
-    target_onboarded_data_terabytes: 10000,
-    hypothetical_onboarding_data_terabytes: (63.74 / 164 / 29) * 1000,
-    daily_onboarding_rate_terabytes: 63.74 / 29,
-  },
-];
-
 export default async function Page(props) {
   const currentHeaders = headers();
-  const { storageProviders, count } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'providers' });
-  const { mapUrl } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'map' });
-  const { clients, phases } = await makeRequest({ host: currentHeaders.get('host'), endpoint: 'clients' });
+  const host = currentHeaders.get('host');
+  const { storageProviders, count } = await makeRequest({ host, endpoint: 'providers' });
+  const { mapUrl } = await makeRequest({ host, endpoint: 'map' });
+  const { clients, phases } = await makeRequest({ host, endpoint: 'clients' });
+  const { onboardingHistory, onboardingDaysAgo } = await makeRequest({ host, endpoint: 'clients/history' });
 
   const listElements = storageProviders.map((each) => {
     return (
@@ -137,7 +35,7 @@ export default async function Page(props) {
     );
   });
 
-  const leftElement = <DataComponents data={data} clients={clients} phases={phases} />;
+  const leftElement = <DataComponents clients={clients} phases={phases} history={onboardingHistory} days={onboardingDaysAgo} />;
 
   return (
     <DefaultLayout left={leftElement}>
