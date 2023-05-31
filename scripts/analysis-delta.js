@@ -136,6 +136,7 @@ async function run() {
     },
     errorFn: (e) => {
       console.log(e);
+      return process.exit(0);
     },
     label: `WRITE_DELTA_DATA`,
   });
