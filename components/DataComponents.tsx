@@ -11,16 +11,22 @@ const ChartLineChartEntities = dynamic(() => import('@components/ChartLineChartE
 const ChartBarChartMacro = dynamic(() => import('@components/ChartBarChartMacro'), { ssr: false });
 
 export default function DataComponents(props) {
-  let first_day = props.history[0].created_at;
-  let firstDayAgo = Utilities.getDaysAgoFromToday(first_day);
+  let firstDay = null;
+  let firstDayAgo = null;
+  if (props.history && props.history.length) {
+    firstDay = props.history[0].created_at;
+    firstDayAgo = Utilities.getDaysAgoFromToday(firstDay);
+  }
 
   const history = props.history.map((each) => {
     const targetDate = new Date(each.created_at);
     const daysAgo = Utilities.getDaysAgoFromToday(each.created_at);
+    const days = firstDayAgo - daysAgo + 1;
+
     const onboarded_data_terabytes = Utilities.bytesToTerabytes(each.total_deals_succeeded_size);
     const total_delta_nodes = Number(each.total_number_of_unique_delta_nodes);
-    const days = firstDayAgo - daysAgo + 1;
     const daily_onboarding_rate_terabytes = onboarded_data_terabytes / days;
+
     return {
       ...each,
       name: `${targetDate.getMonth() + 1}/${targetDate.getDate()}`,
