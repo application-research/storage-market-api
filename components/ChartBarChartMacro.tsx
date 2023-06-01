@@ -27,7 +27,7 @@ export default function ChartBarChartMarco(props) {
           <Bar dataKey="blocked_data_prep" stackId="a" fill="#F1C231" />
           <Bar dataKey="blocked_application" stackId="a" fill="#FFD866" />
           <Bar dataKey="blocked_notary" stackId="a" fill="#FFE598" />
-          <Bar dataKey="onboarding" stackId="a" fill="#D0DFE2" />
+          <Bar dataKey="onboarding_poc" stackId="a" fill="#D0DFE2" />
           <Bar dataKey="done_poc" stackId="a" fill="#00FFFF" />
           <Bar dataKey="onboarding_remaining" stackId="a" fill="#B6D7A8" />
           <Bar dataKey="done" stackId="a" fill="#00FF00" />

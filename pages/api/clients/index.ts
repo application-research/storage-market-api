@@ -42,7 +42,7 @@ export default async function APIGetSpreadSheet(req, res) {
         done: Number(row2['Done']),
         onboarding_remaining: Number(row2['Onboarding-Remaining']),
         done_poc: Number(row2['Done-POC']),
-        onboarding: Number(row2['Onboarding']),
+        onboarding_poc: Number(row2['Onboarding-POC']),
         blocked_notary: Number(row2['Blocked-Notary']),
         blocked_application: Number(row2['Blocked-Application']),
         blocked_data_prep: Number(row2['Blocked-DataPrep']),
