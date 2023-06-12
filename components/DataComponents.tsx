@@ -34,8 +34,8 @@ export default function DataComponents(props) {
       days_ago: daysAgo,
       total_storage_providers: each.total_number_of_sps_worked_with,
       onboarded_data_terabytes,
-      target_onboarding_rate_terabytes: 300,
-      target_onboarded_data_terabytes: 100,
+      target_onboarding_rate_terabytes: 100,
+      target_onboarded_data_terabytes: 500,
       human_onboarded_data_terabytes: Utilities.bytesToSize(each.total_deals_succeeded_size),
       hypothetical_onboarding_data_terabytes: (daily_onboarding_rate_terabytes / total_delta_nodes) * 1000,
       daily_onboarding_rate_terabytes,
@@ -65,11 +65,8 @@ export default function DataComponents(props) {
       <ChartLineChartCulminativeOnboarding data={history} />
 
       <section className={styles.text}>
-        <p>Onboarding rate (TB)</p>
-        <p className={styles.mono}>
-          We're aiming to get to 300 TB of onboarding a day. Hypothetical onboarding rate is taking the average performance of a single Delta node and assuming there are a thousand
-          nodes running.
-        </p>
+        <p>Moving average onboarding rate (TB)</p>
+        <p className={styles.mono}>We're aiming to get to a moving average of 100 TB of onboarding a day.</p>
       </section>
       <ChartLineChartOnboardingRate data={history} />
 

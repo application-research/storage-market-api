@@ -77,9 +77,11 @@ const sendMessage = async ({ store, url }) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Daily onboarding rate to Filecoin Network ➝* ${Utilities.bytesToSize(
+            text: `*Moving average of onboarding ➝* ${Utilities.bytesToSize(
               store.total_deals_succeeded_size / daysDiff
-            )}\n_Hypothetically we could be onboarding ${Utilities.bytesToSize((store.total_deals_succeeded_size * 1000) / daysDiff)} once we scale out the tooling._\n\n`,
+            )}\n_Hypothetically we could have a moving average of ${Utilities.bytesToSize(
+              (store.total_deals_succeeded_size * 1000) / daysDiff
+            )} once we scale out the tooling._\n\n`,
           },
         },
       ],
