@@ -15,10 +15,10 @@ export default async function APIClientOnboardingHistoryByClientName(req, res) {
     .where('client_name', req.query.name)
     .orderBy('created_at', 'asc');
 
-  const targetDate = new Date('2023-05-01');
+  const targetDate = new Date('2023-06-10');
   const currentDate = new Date();
   const timeDiff = currentDate.getTime() - targetDate.getTime();
   const onboardingDaysAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-  res.json({ onboardingHistory: response, onboardingDaysAgo });
+  res.json({ timeseries: response, onboardingDaysAgo });
 }
