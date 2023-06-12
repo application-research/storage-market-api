@@ -32,6 +32,8 @@ export default async function APIGlobalAddressTracker(req, res) {
   res.json({
     providers: [
       ...jsonDelta.map((each) => {
+        // bytes_replicated -> deal bytes
+        // count_replicated -> number of deals
         return { actor_id: each.actor_id, address: null, source: 'DELTA_DM' };
       }),
       {
