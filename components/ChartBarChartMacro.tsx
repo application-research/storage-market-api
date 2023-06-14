@@ -29,6 +29,7 @@ export default function ChartBarChartMarco(props) {
           <Bar dataKey="blocked_notary" stackId="a" fill="#FFE598" />
           <Bar dataKey="onboarding_poc" stackId="a" fill="#D0DFE2" />
           <Bar dataKey="done_poc" stackId="a" fill="#00FFFF" />
+          <Bar dataKey="post_poc_deferment" stackId="a" fill="#9902FF" />
           <Bar dataKey="onboarding_remaining" stackId="a" fill="#B6D7A8" />
           <Bar dataKey="done" stackId="a" fill="#00FF00" />
         </BarChart>

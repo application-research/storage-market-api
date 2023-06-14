@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@components/ChartLineChartCulminativeOnboarding.module.scss';
+import styles from '@components/ChartLineChartOnboardingRate.module.scss';
 
 import * as React from 'react';
 
@@ -16,10 +16,8 @@ export default function ChartLineChartOnboardingRate(props) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="target_onboarded_data_terabytes" stroke="#ff5349" />
-          <Line type="monotone" dataKey="onboarded_data_terabytes" stroke="#0047ff" />
-          <Line type="monotone" dataKey="hivemapper_onboarded" stroke="#dc3545" />
-          <Line type="monotone" dataKey="encloud_onboarded" stroke="#d63384" />
+          <Line type="monotone" dataKey="daily_onboarding_rate_terabytes" stroke="#0047FF" />
+          <Line type="monotone" dataKey="hypothetical_onboarding_data_terabytes" stroke="#BF40BF" />
         </LineChart>
       </ResponsiveContainer>
     </div>

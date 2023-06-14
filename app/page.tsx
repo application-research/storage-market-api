@@ -23,7 +23,7 @@ export default async function Page(props) {
   const { storageProviders, count } = await makeRequest({ host, endpoint: 'providers' });
   const { mapUrl } = await makeRequest({ host, endpoint: 'map' });
   const { clients, phases } = await makeRequest({ host, endpoint: 'clients' });
-  const { onboardingHistory, onboardingDaysAgo } = await makeRequest({ host, endpoint: 'clients/history' });
+  const { onboardingHistory, onboardingDaysAgo, clientsToTrack } = await makeRequest({ host, endpoint: 'clients/history' });
 
   const listElements = storageProviders.map((each) => {
     return (
@@ -35,7 +35,7 @@ export default async function Page(props) {
     );
   });
 
-  const leftElement = <DataComponents clients={clients} phases={phases} history={onboardingHistory} days={onboardingDaysAgo} />;
+  const leftElement = <DataComponents clientsToTrack={clientsToTrack} clients={clients} phases={phases} history={onboardingHistory} days={onboardingDaysAgo} />;
 
   return (
     <DefaultLayout left={leftElement}>
