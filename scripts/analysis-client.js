@@ -99,21 +99,25 @@ async function run() {
 
     await sleep(1000);
 
-    await Utilities.runQuery({
-      queryFn: async () => {
-        const save = await DB.insert({
-          ...store,
-        })
-          .into('client_onboarding_table')
-          .returning('*');
-        console.log(save);
-      },
-      errorFn: (e) => {
-        console.log(e);
-        return process.exit(0);
-      },
-      label: `WRITE_EDGE_DELTA_DATA_FOR_CLIENT-${name}`,
-    });
+    try {
+      await Utilities.runQuery({
+        queryFn: async () => {
+          const save = await DB.insert({
+            ...store,
+          })
+            .into('client_onboarding_table')
+            .returning('*');
+          console.log(save);
+        },
+        errorFn: (e) => {
+          console.log(e);
+          return process.exit(0);
+        },
+        label: `WRITE_EDGE_DELTA_DATA_FOR_CLIENT-${name}`,
+      });
+    } catch (e) {
+      console.log(`writing-${name} FAILED`);
+    }
   }
 
   console.log(`FINISHED: ${NAME}`);

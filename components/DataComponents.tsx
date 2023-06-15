@@ -59,7 +59,7 @@ export default function DataComponents(props) {
       <ChartLineChartEntities data={history} />
 
       <section className={styles.text}>
-        <p>Culminative data (TB)</p>
+        <p>Cumulative data (TB)</p>
       </section>
       <ChartLineChartCulminativeOnboarding data={history} />
 
