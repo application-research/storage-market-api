@@ -5,6 +5,11 @@ import * as Lotus from '../common/lotus';
 
 const NAME = `analysis-client.js`;
 
+const REQUEST_HEADERS = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
+
 console.log(`RUNNING: ${NAME}`);
 
 async function sleep(ms) {
@@ -47,10 +52,7 @@ async function run() {
     try {
       const edge = await fetch(`https://${name}.edge.estuary.tech/stats`, {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: REQUEST_HEADERS,
       });
       edgeData = await edge.json();
     } catch (e) {
@@ -66,10 +68,7 @@ async function run() {
     try {
       const delta = await fetch(`https://${name}.delta.estuary.tech/open/stats/totals/info`, {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: REQUEST_HEADERS,
       });
       deltaData = await delta.json();
     } catch (e) {
@@ -111,7 +110,6 @@ async function run() {
         },
         errorFn: (e) => {
           console.log(e);
-          return process.exit(0);
         },
         label: `WRITE_EDGE_DELTA_DATA_FOR_CLIENT-${name}`,
       });
