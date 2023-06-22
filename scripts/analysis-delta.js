@@ -66,17 +66,6 @@ const sendMessage = async ({ store, url }) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*Total deals succeeded ➝* ${store.total_deals_succeeded}\n_This is out of ${
-              store.total_deals_attempted
-            } attempted Filecoin storage deals, including e2e and import (out of band) storage deals. Deals from Delta succeed ${(store.total_deals_succeeded /
-              store.total_deals_attempted) *
-              100}% of the time._\n\n`,
-          },
-        },
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
             text: `*Moving average of onboarding ➝* ${Utilities.bytesToSize(
               store.total_deals_succeeded_size / daysDiff
             )}\n_Hypothetically we could have a moving average of ${Utilities.bytesToSize(
@@ -118,12 +107,34 @@ async function run() {
   };
 
   if (!queryResponse.total_number_of_unique_delta_nodes) {
-    console.log('Could not query for total_number_of_unique_delta_nodes');
+    console.log('Error: Could not query for total_number_of_unique_delta_nodes');
     return process.exit(0);
   }
 
   if (!queryResponse.total_number_of_sps_worked_with) {
-    console.log('Could not query for total_number_of_sps_worked_with');
+    console.log('Error: Could not query for total_number_of_sps_worked_with');
+    return process.exit(0);
+  }
+
+  let lastWriteEntry = null;
+  try {
+    lastWriteEntry = await DB.select()
+      .from('delta_analytics')
+      .orderBy('created_at', 'desc')
+      .first();
+  } catch (e) {
+    console.log('can not query the latest analytics');
+    return process.exit(0);
+  }
+
+  const targetDate = new Date(lastWriteEntry.created_at);
+  const currentDate = new Date();
+  const timeDiff = currentDate.getTime() - targetDate.getTime();
+  const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+  console.log(daysDiff);
+
+  if (daysDiff < 1) {
+    console.log('Error: Already logged for the day');
     return process.exit(0);
   }
 
