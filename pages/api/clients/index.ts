@@ -49,10 +49,8 @@ export default async function APIGetSpreadSheet(req, res) {
         blocked_data_prep: Number(row2['Blocked-DataPrep']),
         blocked_setup: Number(row2['Blocked-Setup']),
         blocked_education: Number(row2['Blocked-Education']),
-        client_deciding: Number(row2['Client-Deciding']),
-        client_interest: Number(row2['Client-Interest']),
-        client_awareness: Number(row2['Client-Awareness']),
-        dead_on_arrival: Number(row2['Dead-On-Arrival']),
+        blocked_partnership: Number(row2['Blocked-Partnership']),
+        blocked_funding: Number(row2['Blocked-Funding']),
       });
     }
   }
