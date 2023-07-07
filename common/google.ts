@@ -40,3 +40,23 @@ export async function getSheetMultiple() {
   const secondRows = await phasesSheet.getRows();
   return { clientRows: rows, phaseRows: secondRows };
 }
+
+export async function getSheetSpecific() {
+  const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
+
+  const private_key = _.replace(process.env.GOOGLE_PRIVATE_KEY, new RegExp('\\\\n', 'g'), '\n');
+
+  await doc.useServiceAccountAuth({
+    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    private_key,
+  });
+
+  await doc.loadInfo();
+
+  const sheet = doc.sheetsByTitle['Lead Summary'];
+  const rows = await sheet.getRows();
+
+  const phasesSheet = doc.sheetsByTitle['API_PhaseGraph'];
+  const secondRows = await phasesSheet.getRows();
+  return { clientRows: rows, phaseRows: secondRows };
+}

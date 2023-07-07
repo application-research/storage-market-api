@@ -6,7 +6,7 @@ import DB from '@common/db';
 export default async function APIGetSpreadSheet(req, res) {
   await Server.cors(req, res);
 
-  const { clientRows, phaseRows } = await GoogleSheets.getSheetMultiple();
+  const { clientRows, phaseRows } = await GoogleSheets.getSheetSpecific();
 
   const clients = [];
   let id = 0;
