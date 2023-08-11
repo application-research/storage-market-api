@@ -19,26 +19,17 @@ async function makeRequest({ host, endpoint }) {
 
 export default async function Page(props) {
   const currentHeaders = headers();
+
+  /*
   const host = currentHeaders.get('host');
   const { storageProviders, count } = await makeRequest({ host, endpoint: 'providers' });
   const { mapUrl } = await makeRequest({ host, endpoint: 'map' });
   const { clients, phases } = await makeRequest({ host, endpoint: 'clients' });
   const { onboardingHistory, onboardingDaysAgo, clientsToTrack } = await makeRequest({ host, endpoint: 'clients/history' });
-
-  const listElements = storageProviders.map((each) => {
-    return (
-      <div key={`sp-${each.address}`}>
-        <a className={styles.link} href={`https://data.storage.market/api/providers/${each.address}`} target="_blank">
-          ➝ https://data.storage.market/api/providers/{each.address}
-        </a>
-      </div>
-    );
-  });
-
-  const leftElement = <DataComponents clientsToTrack={clientsToTrack} clients={clients} phases={phases} history={onboardingHistory} days={onboardingDaysAgo} />;
+  */
 
   return (
-    <DefaultLayout left={leftElement}>
+    <DefaultLayout>
       <div className={styles.row}>
         <h6 className={styles.heading}>get all Filecoin addresses using Delta.</h6>
         <div>
@@ -63,7 +54,7 @@ export default async function Page(props) {
       </div>
 
       <div className={styles.row}>
-        <h6 className={styles.heading}>get the current Filecoin price (powered by IEXCloud) or convert attoFil to USD and Filecoin.</h6>
+        <h6 className={styles.heading}>get the current Filecoin price or convert attoFil to USD and Filecoin.</h6>
         <div>
           <a className={styles.link} href="https://data.storage.market/api/market/filecoin?attofil=6643845374681246791213" target="_blank">
             ➝ https://data.storage.market/api/market/filecoin?attofil=6643845374681246791213
@@ -74,15 +65,6 @@ export default async function Page(props) {
             ➝ https://data.storage.market/api/market/filecoin?amount=1000000
           </a>
         </div>
-      </div>
-
-      <div className={styles.row}>
-        <h6 className={styles.heading}>
-          [WIP] [Not Working] get ranked storage providers to make deals with based on reputation, that have stored data on Estuary and/or similar data clients (8).
-        </h6>
-        <a className={styles.link} href="https://data.storage.market/api" target="_blank">
-          ➝ https://data.storage.market/api
-        </a>
       </div>
 
       <div className={styles.row}>
@@ -97,17 +79,6 @@ export default async function Page(props) {
         <a className={styles.link} href="https://data.storage.market/api/providers/all" target="_blank">
           ➝ https://data.storage.market/api/providers/all
         </a>
-      </div>
-
-      <div className={styles.row}>
-        <h6 className={styles.heading}>
-          every storage provider Filecoin Data Tools (https://filecoindata.tools) has made successful deals with ({count}){' '}
-          <a className={styles.link} href={mapUrl} target="_blank">
-            &#128506; View Map
-          </a>
-        </h6>
-
-        {listElements}
       </div>
     </DefaultLayout>
   );

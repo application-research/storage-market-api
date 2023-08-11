@@ -106,6 +106,8 @@ async function run() {
     total_number_of_unique_delta_nodes: queryResponse.total_number_of_unique_delta_nodes,
   };
 
+  console.log(store);
+
   if (!queryResponse.total_number_of_unique_delta_nodes) {
     console.log('Error: Could not query for total_number_of_unique_delta_nodes');
     return process.exit(0);
@@ -118,10 +120,7 @@ async function run() {
 
   let lastWriteEntry = null;
   try {
-    lastWriteEntry = await DB.select()
-      .from('delta_analytics')
-      .orderBy('created_at', 'desc')
-      .first();
+    lastWriteEntry = await DB.select().from('delta_analytics').orderBy('created_at', 'desc').first();
   } catch (e) {
     console.log('can not query the latest analytics');
     return process.exit(0);
